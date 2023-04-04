@@ -16,4 +16,7 @@ export const WebCam = styled.div`
 export const ExplainContainer = styled.div`
     display:flex;
     width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 `;

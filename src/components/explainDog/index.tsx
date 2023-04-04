@@ -10,9 +10,11 @@ import {
     ExplainContainer
  } from "./styles";
  import { useRef } from "react"
-import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
-import arrow from "../../assets/icons/arrow.svg";
+
+import Explain from "./explain";
+
+
 function ExplainDog(){
 
     const URL = "https://teachablemachine.withgoogle.com/models/hjTq9nDGj/";
@@ -23,38 +25,31 @@ function ExplainDog(){
     const init = async () => {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
-
-        // load the model and metadata
-        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-        // or files from your local hard drive
-        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
         model = await tmImage.load(modelURL, metadataURL);       
         maxPredictions = model.getTotalClasses();
-
-        // Convenience function to setup a webcam
-        const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
         
-        await webcam.setup(); // request access to the webcam
+        const flip = true; 
+        webcam = new tmImage.Webcam(200, 200, flip); 
+        await webcam.setup();
         await webcam.play();
         window.requestAnimationFrame(loop);
-        console.log(webcam);
-        console.log(webcam.canvas);
+
         if (webcamContainer.current != null) {
+            // da erro mas funciona 🤦‍♂️
             webcamContainer.current.appendChild(webcam.canvas);
         }
-        // append elements to the DOM
     }
 
     const loop = () => {
-        webcam.update(); // update the webcam frame
+        webcam.update(); 
         // await predict();
         window.requestAnimationFrame(loop);
     }
 
     const predict = async () => {
-        // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+
+        // mostra todo o obj
         console.log(prediction);
 
         const probability = prediction.reduce(
@@ -63,6 +58,7 @@ function ExplainDog(){
             }
         );
 
+        // mostra o que provavelmente é
         console.log(probability);
     }
 
@@ -78,10 +74,12 @@ function ExplainDog(){
                 </Text>
                 <ExplainContainer>
                     <WebCam id="webcam-container" ref={webcamContainer} />
-                    <img src={arrow} height={90} width={"50px"}  />
-                    <div></div>
+                     <svg width="40" height="24" viewBox="0 0 61 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60.0607 13.0607C60.6464 12.4749 60.6464 11.5251 60.0607 10.9393L50.5147 1.3934C49.9289 0.807611 48.9792 0.807611 48.3934 1.3934C47.8076 1.97919 47.8076 2.92893 48.3934 3.51472L56.8787 12L48.3934 20.4853C47.8076 21.0711 47.8076 22.0208 48.3934 22.6066C48.9792 23.1924 49.9289 23.1924 50.5147 22.6066L60.0607 13.0607ZM0 13.5H59V10.5H0V13.5Z" fill="#4D5360"/>
+                    </svg>
+                    <Explain />
                 </ExplainContainer>
-                <ButtonCTA onClick={predict}></ButtonCTA>
+                <ButtonCTA onClick={predict}>Gerar Explicação</ButtonCTA>
             </CentralDiv>
         
         </Container>
