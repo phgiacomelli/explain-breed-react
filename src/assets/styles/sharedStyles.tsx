@@ -10,8 +10,8 @@ export const Container = styled.div`
 `;
 
 export const CentralDiv = styled.div`
-    width: 900px;
-    height: 700px;
+    width: 700px;
+    height: 500px;
     padding: 2rem 5rem;
     display: flex;
     justify-content: center;
