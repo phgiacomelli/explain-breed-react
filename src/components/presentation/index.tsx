@@ -6,22 +6,26 @@ import {
     ButtonCTA
 } from "../../assets/styles/sharedStyles";
 import { Link } from "react-router-dom";
+import dogHome from "../../assets/icons/doh-home.svg";
 
 function Presentation() {
     return (
         <Container>
-            <CentralDiv>
-                <Title>
+            <CentralDiv height="645px">
+                <Title> 
                     Sobre o Explain Breed
                 </Title>
                 <Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores aperiam exercitationem aut quis voluptatum aliquam tempore cum ex consequatur blanditiis beatae velit, ratione ducimus ea nobis ipsam maxime sunt laboriosam.
+                    O Projeto foi criado para auxiliar as pessoas que pensam em adotar/ter um cachorro, onde o usuário irá mostrar uma foto do cachorro pela webcam/câmera, 
+                    e o programa irá retornar uma breve explicação sobre as características da raça do respectivo animal. Note que não irá funcionar com todas as raças existentes,
+                    por conta de ser um projeto limitado, mas nada impede de que com o tempo seja ampliado e podendo assim, atender a todas as necessidades.
                 </Text>
                 <Link to={"/api-key"}>
                     <ButtonCTA>
                         Vamos lá
                     </ButtonCTA>
                 </Link>
+                <img src={dogHome} />
             </CentralDiv>
 
         </Container>

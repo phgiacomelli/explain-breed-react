@@ -7,31 +7,20 @@ import {
 } from "../../assets/styles/sharedStyles";
 
 import { useNavigate } from "react-router-dom";
-import { Input } from "./styles";
-import { ChangeEvent, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { Input, Link } from "./styles";
+import { useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
+import image from "../../assets/icons/image.svg";
 import * as Encryptor from "../../assets/utils/encryptor";
+import { showMessage, ToastType } from "../../assets/utils/showMessage";
+
 
 const checkApiKey = (str: string): boolean => {
     const regex = /^sk-.{48}$/;
     return regex.test(str);
 }
 
-enum ToastType {
-    Error = "error",
-    Info = "info",
-    Warning = "warning",
-    Success = "success"
-}
 
-const showMessage = (message: string, type:ToastType) => {
-    toast(message,{
-        position: toast.POSITION.TOP_CENTER,
-        type: type,
-        theme: "dark"
-    })
-}
 
 function GetApiKey() {
     const [key, setKey] = useState<string>('');
@@ -40,7 +29,6 @@ function GetApiKey() {
     useEffect(() => {
         let key_storage = Encryptor.getFromLocalStorage("apiKey");
         let show_page = Encryptor.getFromLocalStorage("showPage");
-        console.log(key_storage == "");
 
         if (key_storage != "" && 
             show_page != "true"){
@@ -50,7 +38,6 @@ function GetApiKey() {
         if (key_storage != "") {
             setKey(key_storage);
         }
-
     }, []);
 
     const handleKey = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,19 +63,20 @@ function GetApiKey() {
 
     return (
         <Container>
-            <CentralDiv>
+            <CentralDiv height="645px">
                 <Title>
                     Configuranção necessária
                 </Title>
                 <Text>
-                    Preencha com sua Api Key da OpenAI. É necessário para fazer a comunicação com o ChatGPT.
+                    Preencha o campo abaixo com sua Api Key da OpenAI. Este passo é necessário para fazer a comunicação com o ChatGPT.
+                    Em caso de dúvidas, segue o <Link href="https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key" target="_blank">link</Link> com o tutorial de como localizar a Api Key
                 </Text>
                 <Input placeholder="Api Key..." value={key} onChange={handleKey} />
                 <ButtonCTA onClick={saveKey}>
                     Avançar
                 </ButtonCTA>
+                <img src={image} />
             </CentralDiv>
-            <ToastContainer autoClose={2000} />
         </Container>
     )
 }

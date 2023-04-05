@@ -10,4 +10,17 @@ export const Input = styled.input`
     font-size: 1rem;
     /* letter-spacing: .8px; */
     color: #CECECE;
+
+    @media (max-width: 1150px) {
+        width: 100%;
+    }
+
+    @media (max-width: 390px) {
+        padding: .2rem;
+        width: 100%;
+    }
+`;
+
+export const Link = styled.a`
+    color: #d4770d;
 `;
