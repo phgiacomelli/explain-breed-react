@@ -49,7 +49,7 @@ function ExplainDog() {
 
     const URL = "https://teachablemachine.withgoogle.com/models/hjTq9nDGj/";
     const API_KEY = Encryptor.getFromLocalStorage("apiKey");
-    const webcamContainer = useRef(null);
+    const webcamContainer = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
     const [explain, setExplain] = useState<string | null>(null);
@@ -155,7 +155,7 @@ function ExplainDog() {
 
     return (
         <Container>
-            <CentralDiv largura={"50%"}  >
+            <CentralDiv width={"50%"}  >
                 <Title>
                     Conhecendo mais sobre o dog!
                 </Title>
@@ -170,7 +170,7 @@ function ExplainDog() {
                         <Explain text={explain} />
                 </ExplainContent>
                 <ButtonCTA onClick={predict}>Gerar Explicação</ButtonCTA>
-                <button onClick={changeApiKey}></button>
+                <button onClick={changeApiKey}>api key</button>
             </CentralDiv>
 
         </Container>

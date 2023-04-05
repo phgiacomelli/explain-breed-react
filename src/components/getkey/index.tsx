@@ -34,7 +34,7 @@ const showMessage = (message: string, type:ToastType) => {
 }
 
 function GetApiKey() {
-    const [key, setKey] = useState<string>("");
+    const [key, setKey] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,16 +42,15 @@ function GetApiKey() {
         let show_page = Encryptor.getFromLocalStorage("showPage");
 
         if (key_storage != null && show_page != "true")
-            navigate("/explain-dog");
+            return navigate("/explain-dog");
         
-        // if (key) {
-            
-        // }
-        // setKey();
+        console.log(key_storage);
+        
+        setKey(key_storage);
 
     }, []);
 
-    const handleKey = (evt: ChangeEvent) => {
+    const handleKey = (evt: React.ChangeEvent<HTMLInputElement>) => {
         setKey(evt.target.value);
     }
 
@@ -69,6 +68,7 @@ function GetApiKey() {
         // encrypt antes de salvar - N esquecer
         Encryptor.setOnLocalStorage("apiKey", key);
         navigate("/explain-dog");
+        showMessage("Api key inserida com sucesso!", ToastType.Success);
     }
 
     return (
@@ -80,7 +80,7 @@ function GetApiKey() {
                 <Text>
                     Preencha com sua Api Key da OpenAI. É necessário para fazer a comunicação com o ChatGPT.
                 </Text>
-                <Input placeholder="Api Key..." onChange={handleKey} />
+                <Input placeholder="Api Key..." value={key} onChange={handleKey} />
                 <ButtonCTA onClick={saveKey}>
                     Avançar
                 </ButtonCTA>
