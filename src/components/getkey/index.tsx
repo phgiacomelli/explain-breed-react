@@ -40,13 +40,16 @@ function GetApiKey() {
     useEffect(() => {
         let key_storage = Encryptor.getFromLocalStorage("apiKey");
         let show_page = Encryptor.getFromLocalStorage("showPage");
+        console.log(key_storage == "");
 
-        if (key_storage != null && show_page != "true")
+        if (key_storage != "" && 
+            show_page != "true"){
             return navigate("/explain-dog");
+        }
         
-        console.log(key_storage);
-        
-        setKey(key_storage);
+        if (key_storage != "") {
+            setKey(key_storage);
+        }
 
     }, []);
 
