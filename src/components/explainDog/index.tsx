@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import * as Encryptor from "../../assets/utils/encryptor";
 import { showMessage, ToastType } from "../../assets/utils/showMessage";
 import { Loading } from "./loading";
+import { ToastContainer } from "react-toastify";
 
 type BreedProbabilityModel = {
     className: string,
@@ -176,6 +177,7 @@ function ExplainDog() {
                 <ButtonSecondary onClick={changeApiKey}>api key</ButtonSecondary>
             </CentralDiv>
             <div className="teste">{isLoading ? <Loading isLoading={isLoading} /> : ""}</div>
+            <ToastContainer autoClose={2000} />
         </Container>
     )
 }

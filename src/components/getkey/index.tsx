@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import image from "../../assets/icons/image.svg";
 import * as Encryptor from "../../assets/utils/encryptor";
 import { showMessage, ToastType } from "../../assets/utils/showMessage";
+import { ToastContainer } from "react-toastify";
 
 
 const checkApiKey = (str: string): boolean => {
@@ -77,6 +78,7 @@ function GetApiKey() {
                 </ButtonCTA>
                 <img src={image} />
             </CentralDiv>
+            <ToastContainer autoClose={2000} />
         </Container>
     )
 }

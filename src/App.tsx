@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <Presentation/>
-      <ToastContainer autoClose={2000} />
     </>
   )
 }
