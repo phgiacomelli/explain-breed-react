@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+type CentralDivProps = {
+    width: Number,
+    height: Number
+}
+
 export const Container = styled.div`
     width: 100%;
     height: 100vh;
@@ -10,8 +15,8 @@ export const Container = styled.div`
 `;
 
 export const CentralDiv = styled.div`
-    width: 700px;
-    height: 500px;
+    width: ${props => props.largura ? props.largura :  "700px"};
+    min-height: ${props => props.altura ? props.altura :  "500px"};
     padding: 2rem 5rem;
     display: flex;
     justify-content: center;
